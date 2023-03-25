@@ -1,15 +1,11 @@
 {
-  description = "Pepper's flake templates";
+  description = "Simple and personal template for Rust projects";
   outputs = { self, ... }: {
 	  templates = {
-		  backend = {
-			  path = ./backend;
-			  description = "A backend written in Rust";
+		  rust = {
+			  path = ./rust;
+			  description = "Simple Rust project";
 		  };
-      elixir = {
-        path = ./frontend;
-        description = "A frontend written in Elixir/Phoenix";
-      }
 	  };
   };
 }
