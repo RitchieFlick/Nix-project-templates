@@ -1,5 +1,5 @@
 [package]
-name = "Rust template using Nix"
+name = "RustNix"
 version = "0.1.0"
 edition = "2021"
 
