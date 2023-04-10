@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "minimalRust"
+name = "Rust template using Nix"
 version = "0.1.0"

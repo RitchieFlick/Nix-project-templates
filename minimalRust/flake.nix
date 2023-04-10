@@ -1,29 +1,20 @@
 {
-  description = "Roc flake";
+  description = "A Rust template using Nix flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # rust from nixpkgs has some libc problems, this is patched in the rust-overlay
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # to easily make configs for multiple architectures
     flake-utils.url = "github:numtide/flake-utils";
-    # to be able to use vulkan system libs for editor graphics
-    nixgl = {
-      url = "github:guibou/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, rust-overlay, flake-utils, nixgl }:
+  outputs = { self, nixpkgs, rust-overlay, flake-utils }:
     let supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
     in flake-utils.lib.eachSystem supportedSystems (system:
       let
-        overlays = [ (import rust-overlay) ]
-          ++ (if system == "x86_64-linux" then [ nixgl.overlay ] else [ ]);
+        overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; };
         llvmPkgs = pkgs.llvmPackages_13;
 
