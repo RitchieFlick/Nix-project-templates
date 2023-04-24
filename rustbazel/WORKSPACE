@@ -1,0 +1,17 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "rules_rust",
+    sha256 = "a0a9c7bf3235bb0aaeaca333780e30155858e57c68083baf0970f60d21c05659",
+    urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.21.0/rules_rust-v0.21.0.tar.gz"],
+)
+
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+
+rules_rust_dependencies()
+
+rust_register_toolchains(
+    edition = "2021",
+    versions = [
+        "1.69.0"
+    ],
+)
